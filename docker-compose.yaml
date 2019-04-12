@@ -14,18 +14,26 @@ services:
       - nginx-net
 
   keepalived:
-    image: osixia/keepalived:1.4.5
+    image: osixia/keepalived:2.0.15
     container_name: keepalived
     restart: always
+    command: ["--copy-service"]
     depends_on:
-     - nginx
+      - nginx
     network_mode: "host"
     cap_add:
-     - NET_ADMIN
+      - NET_ADMIN
+    environment:
+      KEEPALIVED_STATE: ${STATE}
+      KEEPALIVED_PRIORITY: ${PRIORITY}
+      KEEPALIVED_INTERFACE: ${INTERFACE}
+      KEEPALIVED_PASSWORD: ${PASSWORD}
+      KEEPALIVED_ROUTER_ID: ${ROUTER_ID}
+      KEEPALIVED_UNICAST_PEERS: "#PYTHON2BASH:[${UNICAST_PEERS}]"
+      KEEPALIVED_VIRTUAL_IPS: "#PYTHON2BASH:[${VIRTUAL_IPS}]"
     volumes:
-     - ./keepalived/keepalived.conf:/usr/local/etc/keepalived/keepalived.conf
-     - ./keepalived/check-status.sh:/etc/keepalived/check-status.sh
-     - ./keepalived/notify.sh:/container/service/keepalived/assets/notify.sh
+      - ./keepalived/keepalived.conf:/container/service/keepalived/assets/keepalived.conf
+      - ./keepalived/check-status.sh:/etc/keepalived/check-status.sh
 
 networks:
   nginx-net:

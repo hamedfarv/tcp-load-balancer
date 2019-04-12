@@ -1,0 +1,19 @@
+#########################################
+# Edit this file to configure keepalived
+#########################################
+
+# One MASTER, others BACKUP
+STATE=MASTER
+
+# MASTER 150, others a lower number but not same with each other
+PRIORITY=150
+
+INTERFACE=eth0
+PASSWORD=d0cker
+ROUTER_ID=51
+
+# Comma separated list of peers not including self. Example: '1.2.3.4','1.2.3.5'
+UNICAST_PEERS='192.168.32.76'
+
+# Comma separated list vip addresses
+VIRTUAL_IPS='192.168.32.74'
