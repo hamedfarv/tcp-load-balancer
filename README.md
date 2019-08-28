@@ -6,20 +6,21 @@ This project implements TCP Load Balancer with keepalived and nginx. The setup i
 
 ```mermaid
 graph LR
-  user -->|ports 80 & 443| vip
-  ng1 --- t1
-  ng1 --- t2
-  ng1 --- t3
-  subgraph 
+  user -->|ports 80 & 443| vip;
+  ng1 --- t1;
+  ng1 --- t2;
+  ng1 --- t3;
+  
+  subgraph " "
     subgraph load-balancer-1
       vip((vip)) -.- ng1(nginx)
-      kl1(keepalived) --- |health check: localhost:8080/nginx-status| ng1 
+      kl1(keepalived) --- |"health check: localhost:8080/nginx-status"| ng1 
     end
     subgraph load-balancer-2
       kl2(keepalived) --- ng2(nginx)
     end
   end
-  subgraph 
+  subgraph " "
     subgraph Upstream
       t1(Target-1)  
       t2(Target-2)  
