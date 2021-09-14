@@ -25,12 +25,12 @@ services:
       - NET_ADMIN
     environment:
       KEEPALIVED_STATE: ${STATE}
-      KEEPALIVED_PRIORITY: ${PRIORITY}
+      KEEPALIVED_PRIORITY: "150"
       KEEPALIVED_INTERFACE: ${INTERFACE}
       KEEPALIVED_PASSWORD: ${PASSWORD}
       KEEPALIVED_ROUTER_ID: ${ROUTER_ID}
-      KEEPALIVED_UNICAST_PEERS: "#PYTHON2BASH:[${UNICAST_PEERS}]"
-      KEEPALIVED_VIRTUAL_IPS: "#PYTHON2BASH:[${VIRTUAL_IPS}]"
+      KEEPALIVED_UNICAST_PEERS: "161.35.8.19"
+      KEEPALIVED_VIRTUAL_IPS: "178.128.134.237"
     volumes:
       - ./keepalived/keepalived.conf:/container/service/keepalived/assets/keepalived.conf
       - ./keepalived/check-status.sh:/etc/keepalived/check-status.sh
